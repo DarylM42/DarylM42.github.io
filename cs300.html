@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CS-300 AVL Tree | Daryl Murtha ePortfolio</title>
+  <meta name="description" content="CS-300 Data Structures artifact – course scheduling system upgraded from BST to self-balancing AVL tree.">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-brand">
+      <span>Daryl Murtha</span>&nbsp;<span class="accent">| CS-499</span>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.parentElement.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="code-review.html">Code Review</a></li>
+      <li><a href="cs465.html">CS-465</a></li>
+      <li><a href="cs300.html" class="active">CS-300</a></li>
+      <li><a href="cs340.html">CS-340</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== PAGE HEADER ===== -->
+<header class="page-header">
+  <div class="container">
+    <p class="eyebrow">Artifact 2 · Algorithms &amp; Data Structures</p>
+    <h1>CS-300: AVL Tree Program</h1>
+    <p>
+      Course-scheduling system upgraded from an unbalanced Binary Search Tree to a
+      self-balancing AVL tree, delivering guaranteed O(log n) performance and
+      comprehensive unit testing.
+    </p>
+    <div style="margin-top:1.25rem;display:flex;gap:.75rem;flex-wrap:wrap;">
+      <span class="tag purple">C++</span>
+      <span class="tag purple">AVL Tree</span>
+      <span class="tag purple">O(log n)</span>
+      <span class="tag purple">Unit Tests</span>
+      <span class="tag purple">Rotations</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===== BREADCRUMB ===== -->
+<div class="breadcrumb">
+  <div class="container">
+    <a href="index.html">Home</a>
+    <span>›</span>
+    CS-300 AVL Tree Program
+  </div>
+</div>
+
+<main>
+
+  <!-- Links -->
+  <section class="section" style="padding-bottom:0;">
+    <div class="container">
+      <div class="grid-2">
+        <a href="https://github.com/YOUR-GITHUB-USERNAME/cs300-avl-tree" target="_blank" rel="noopener" style="text-decoration:none;">
+          <div class="artifact-link-card">
+            <div class="icon">📂</div>
+            <div class="info">
+              <h4>Enhanced Code on GitHub</h4>
+              <p>View the full enhanced CS-300 repository → github.com/YOUR-GITHUB-USERNAME/cs300-avl-tree</p>
+            </div>
+          </div>
+        </a>
+        <a href="https://github.com/YOUR-GITHUB-USERNAME/cs300-avl-tree/tree/original" target="_blank" rel="noopener" style="text-decoration:none;">
+          <div class="artifact-link-card">
+            <div class="icon">🗂️</div>
+            <div class="info">
+              <h4>Original Artifact (Branch)</h4>
+              <p>Compare against the unmodified original code on the <code>original</code> branch.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section class="section">
+    <div class="container">
+      <div class="grid-2-1" style="align-items:start;">
+        <div>
+          <span class="section-label">Artifact Overview</span>
+          <h2>What Is This Artifact?</h2>
+          <div class="divider"></div>
+          <p>
+            The CS-300 artifact is a course-scheduling management program developed in C++ during
+            the CS-300 (Data Structures and Algorithms) course. The program allows users to load
+            course data from a CSV file, store it in a tree-based data structure, and perform
+            searches, retrievals, and sorted listings of available courses and their prerequisites.
+          </p>
+          <p>
+            In its original implementation the program used a basic, unbalanced Binary Search Tree
+            (BST). While a BST offers average-case O(log n) performance for search and insertion,
+            it degrades to O(n) — effectively a linked list — when data is inserted in sorted or
+            nearly-sorted order. For a course catalog that is almost always sorted alphabetically
+            by course code, this is precisely the worst-case scenario, not a rare edge case.
+          </p>
+          <p>
+            This artifact was selected because the BST-to-AVL-tree upgrade is a canonical example
+            of the kind of engineering judgment that employers value: recognizing that a correct
+            solution is not necessarily a good solution, and knowing which data structure to reach
+            for when performance guarantees matter.
+          </p>
+        </div>
+
+        <!-- Sidebar: Complexity Comparison -->
+        <div>
+          <div class="card">
+            <div class="card-header-bar"></div>
+            <div class="card-body">
+              <h4 style="margin-bottom:1.1rem;">Complexity Comparison</h4>
+              <table style="width:100%;font-size:.88rem;border-collapse:collapse;">
+                <thead>
+                  <tr style="text-align:left;border-bottom:2px solid var(--border);">
+                    <th style="padding:.4rem .6rem;">Operation</th>
+                    <th style="padding:.4rem .6rem;color:#c0392b;">BST (Worst)</th>
+                    <th style="padding:.4rem .6rem;color:#17875e;">AVL</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--border);">
+                    <td style="padding:.4rem .6rem;">Search</td>
+                    <td style="padding:.4rem .6rem;color:#c0392b;">O(n)</td>
+                    <td style="padding:.4rem .6rem;color:#17875e;">O(log n)</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--border);">
+                    <td style="padding:.4rem .6rem;">Insert</td>
+                    <td style="padding:.4rem .6rem;color:#c0392b;">O(n)</td>
+                    <td style="padding:.4rem .6rem;color:#17875e;">O(log n)</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--border);">
+                    <td style="padding:.4rem .6rem;">Delete</td>
+                    <td style="padding:.4rem .6rem;color:#c0392b;">O(n)</td>
+                    <td style="padding:.4rem .6rem;color:#17875e;">O(log n)</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:.4rem .6rem;">In-order print</td>
+                    <td style="padding:.4rem .6rem;">O(n)</td>
+                    <td style="padding:.4rem .6rem;">O(n)</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p style="font-size:.8rem;color:var(--muted);margin-top:.75rem;">
+                BST worst-case occurs with sorted input — the common case for alphabetically
+                ordered course codes.
+              </p>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:1.25rem;">
+            <div class="card-header-bar"></div>
+            <div class="card-body">
+              <h4 style="margin-bottom:.75rem;">Enhancement Checklist</h4>
+              <ul style="list-style:none;font-size:.9rem;">
+                <li>✅ AVL node with balance factor tracking</li>
+                <li>✅ Left, right, left-right, right-left rotations</li>
+                <li>✅ Height-based rebalancing after every insert/delete</li>
+                <li>✅ Input validation on CSV parser</li>
+                <li>✅ Unit tests for rotations, balance, and edge cases</li>
+                <li>✅ Doxygen-style inline documentation</li>
+                <li>✅ Graceful handling of duplicate course codes</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Narrative -->
+  <section class="section section-alt">
+    <div class="container">
+      <span class="section-label">Enhancement Narrative</span>
+      <h2>Design Decisions &amp; Reflection</h2>
+      <div class="divider"></div>
+
+      <div class="narrative">
+        <h3>Justification for Inclusion</h3>
+        <div class="divider"></div>
+        <p>
+          The CS-300 artifact was chosen because it directly demonstrates mastery of algorithmic
+          complexity analysis and data structure selection — two of the most foundational skills
+          in computer science. The original BST implementation was correct in the narrow sense
+          of producing right answers, but it was not engineered for robustness. An employer or
+          technical interviewer would rightly question why a developer chose an unbalanced tree
+          for data that is almost certainly sorted. The enhancement corrects that judgment and
+          produces a solution that is correct, efficient, and verifiably so through automated tests.
+        </p>
+      </div>
+
+      <div class="narrative" style="margin-top:1.5rem;">
+        <h3>What Was Enhanced and Why</h3>
+        <div class="divider"></div>
+        <p>
+          <strong>AVL Node Structure.</strong> The original BST node contained a left pointer,
+          a right pointer, and data. I added a <code>height</code> field to each node. Height
+          is recomputed after every insertion or deletion and drives the balance-factor check
+          that determines whether rotation is necessary. The balance factor of any node must
+          remain in the range [–1, 0, +1]; a value outside this range triggers the appropriate
+          rotation.
+        </p>
+        <p>
+          <strong>Rotation Logic.</strong> I implemented all four rotation cases required for
+          AVL rebalancing:
+        </p>
+        <ul style="margin-left:1.5rem;margin-bottom:1rem;">
+          <li><strong>Left Rotation</strong> — applied when the right subtree is heavy.</li>
+          <li><strong>Right Rotation</strong> — applied when the left subtree is heavy.</li>
+          <li><strong>Left-Right Rotation</strong> — double rotation for left-heavy right subtree.</li>
+          <li><strong>Right-Left Rotation</strong> — double rotation for right-heavy left subtree.</li>
+        </ul>
+        <p>
+          Each rotation is a pure function that takes a node pointer and returns the new subtree
+          root, keeping the rebalancing logic completely separate from the insert/delete logic.
+          This separation made the rotation functions independently testable.
+        </p>
+        <p>
+          <strong>Input Validation.</strong> The CSV parser in the original code made optimistic
+          assumptions about data format: it would crash or produce garbage output given malformed
+          rows, missing fields, or a file that did not exist. The enhanced version validates the
+          file path before opening, checks each row for the minimum expected number of fields,
+          and skips malformed rows with a descriptive console warning rather than aborting.
+        </p>
+        <p>
+          <strong>Unit Testing.</strong> A dedicated test file exercises the AVL tree in isolation.
+          Tests cover: inserting already-sorted sequences (the worst case for a plain BST), verifying
+          tree height remains logarithmic, confirming in-order traversal produces sorted output,
+          searching for present and absent keys, and deleting leaf and internal nodes. These tests
+          can be run with a single build target and produce pass/fail output.
+        </p>
+      </div>
+
+      <div class="narrative" style="margin-top:1.5rem;">
+        <h3>Reflection: What I Learned</h3>
+        <div class="divider"></div>
+        <p>
+          Implementing AVL rotations from scratch rather than using a library was a deliberately
+          challenging choice. Working through the four rotation cases — drawing diagrams, tracing
+          pointer assignments, and debugging balance-factor drift — gave me a far deeper understanding
+          of tree mechanics than reading a textbook description could provide. I made mistakes:
+          my initial right-left double rotation was updating heights in the wrong order, leading
+          to a tree that reported itself as balanced when it was not. Catching that bug through
+          unit tests rather than in production was a concrete demonstration of why testing matters.
+        </p>
+        <p>
+          I also learned to be skeptical of average-case complexity claims. The BST's O(log n)
+          average case sounds impressive until you ask: <em>average over what distribution?</em>
+          Real-world data is almost never uniformly random. Designing for the realistic worst case —
+          sorted input for a course catalog — is what separates production-quality code from
+          homework code.
+        </p>
+        <div class="callout teal">
+          <strong>Course Outcome Addressed</strong>
+          This enhancement directly addresses: <em>"Design and evaluate computing solutions that
+          solve a given problem using algorithmic principles and computer science practices and
+          standards appropriate to its solution, while managing the trade-offs involved in design
+          choices."</em>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Code Sample -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">Code Sample</span>
+      <h2>AVL Insert with Rebalancing</h2>
+      <div class="divider"></div>
+      <p>
+        The following C++ snippet shows the recursive insert function and the
+        rebalancing logic that fires after each insertion to maintain the AVL
+        height invariant. Helper functions <code>getHeight()</code> and
+        <code>getBalance()</code> are also shown.
+      </p>
+
+      <div class="code-block">
+<span class="cmt">// avl_tree.cpp — insert with automatic rebalancing</span><br><br>
+
+<span class="kw">int</span> <span class="fn">getHeight</span>(Node* node) {<br>
+&nbsp;&nbsp;<span class="kw">return</span> node ? node-&gt;height : <span class="num">0</span>;<br>
+}<br><br>
+
+<span class="kw">int</span> <span class="fn">getBalance</span>(Node* node) {<br>
+&nbsp;&nbsp;<span class="kw">return</span> node ? <span class="fn">getHeight</span>(node-&gt;left) - <span class="fn">getHeight</span>(node-&gt;right) : <span class="num">0</span>;<br>
+}<br><br>
+
+Node* <span class="fn">rightRotate</span>(Node* y) {<br>
+&nbsp;&nbsp;Node* x  = y-&gt;left;<br>
+&nbsp;&nbsp;Node* T2 = x-&gt;right;<br>
+&nbsp;&nbsp;x-&gt;right = y;   y-&gt;left = T2;<br>
+&nbsp;&nbsp;y-&gt;height = <span class="fn">max</span>(<span class="fn">getHeight</span>(y-&gt;left), <span class="fn">getHeight</span>(y-&gt;right)) + <span class="num">1</span>;<br>
+&nbsp;&nbsp;x-&gt;height = <span class="fn">max</span>(<span class="fn">getHeight</span>(x-&gt;left), <span class="fn">getHeight</span>(x-&gt;right)) + <span class="num">1</span>;<br>
+&nbsp;&nbsp;<span class="kw">return</span> x;<br>
+}<br><br>
+
+Node* <span class="fn">leftRotate</span>(Node* x) {<br>
+&nbsp;&nbsp;Node* y  = x-&gt;right;<br>
+&nbsp;&nbsp;Node* T2 = y-&gt;left;<br>
+&nbsp;&nbsp;y-&gt;left = x;   x-&gt;right = T2;<br>
+&nbsp;&nbsp;x-&gt;height = <span class="fn">max</span>(<span class="fn">getHeight</span>(x-&gt;left), <span class="fn">getHeight</span>(x-&gt;right)) + <span class="num">1</span>;<br>
+&nbsp;&nbsp;y-&gt;height = <span class="fn">max</span>(<span class="fn">getHeight</span>(y-&gt;left), <span class="fn">getHeight</span>(y-&gt;right)) + <span class="num">1</span>;<br>
+&nbsp;&nbsp;<span class="kw">return</span> y;<br>
+}<br><br>
+
+Node* <span class="fn">insert</span>(Node* node, Course course) {<br>
+&nbsp;&nbsp;<span class="cmt">// 1. Standard BST insert</span><br>
+&nbsp;&nbsp;<span class="kw">if</span> (!node) <span class="kw">return</span> <span class="kw">new</span> <span class="fn">Node</span>(course);<br>
+&nbsp;&nbsp;<span class="kw">if</span> (course.courseId &lt; node-&gt;course.courseId)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;node-&gt;left  = <span class="fn">insert</span>(node-&gt;left,  course);<br>
+&nbsp;&nbsp;<span class="kw">else if</span> (course.courseId &gt; node-&gt;course.courseId)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;node-&gt;right = <span class="fn">insert</span>(node-&gt;right, course);<br>
+&nbsp;&nbsp;<span class="kw">else</span> <span class="kw">return</span> node; <span class="cmt">// duplicate — ignore</span><br><br>
+
+&nbsp;&nbsp;<span class="cmt">// 2. Update height of this ancestor node</span><br>
+&nbsp;&nbsp;node-&gt;height = <span class="num">1</span> + <span class="fn">max</span>(<span class="fn">getHeight</span>(node-&gt;left), <span class="fn">getHeight</span>(node-&gt;right));<br><br>
+
+&nbsp;&nbsp;<span class="cmt">// 3. Check balance factor and apply rotations</span><br>
+&nbsp;&nbsp;<span class="kw">int</span> balance = <span class="fn">getBalance</span>(node);<br><br>
+
+&nbsp;&nbsp;<span class="cmt">// Left-Left case</span><br>
+&nbsp;&nbsp;<span class="kw">if</span> (balance &gt; <span class="num">1</span> &amp;&amp; course.courseId &lt; node-&gt;left-&gt;course.courseId)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="fn">rightRotate</span>(node);<br>
+&nbsp;&nbsp;<span class="cmt">// Right-Right case</span><br>
+&nbsp;&nbsp;<span class="kw">if</span> (balance &lt; -<span class="num">1</span> &amp;&amp; course.courseId &gt; node-&gt;right-&gt;course.courseId)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="fn">leftRotate</span>(node);<br>
+&nbsp;&nbsp;<span class="cmt">// Left-Right case</span><br>
+&nbsp;&nbsp;<span class="kw">if</span> (balance &gt; <span class="num">1</span> &amp;&amp; course.courseId &gt; node-&gt;left-&gt;course.courseId) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;node-&gt;left = <span class="fn">leftRotate</span>(node-&gt;left);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="fn">rightRotate</span>(node);<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<span class="cmt">// Right-Left case</span><br>
+&nbsp;&nbsp;<span class="kw">if</span> (balance &lt; -<span class="num">1</span> &amp;&amp; course.courseId &lt; node-&gt;right-&gt;course.courseId) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;node-&gt;right = <span class="fn">rightRotate</span>(node-&gt;right);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="fn">leftRotate</span>(node);<br>
+&nbsp;&nbsp;}<br><br>
+
+&nbsp;&nbsp;<span class="kw">return</span> node; <span class="cmt">// no rebalancing needed</span><br>
+}
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <p class="footer-name">Daryl Murtha</p>
+    <p>Computer Science · Southern New Hampshire University · CS-499 Capstone</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="code-review.html">Code Review</a>
+      <a href="cs465.html">CS-465</a>
+      <a href="cs300.html">CS-300</a>
+      <a href="cs340.html">CS-340</a>
+      <a href="https://github.com/YOUR-GITHUB-USERNAME" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+    <small>&copy; 2026 Daryl Murtha. All rights reserved.</small>
+  </div>
+</footer>
+
+</body>
+</html>
