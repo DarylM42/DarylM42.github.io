@@ -100,8 +100,8 @@
             <em>Grazioso Salvare</em>, an international animal rescue organization that trains
             dogs for search-and-rescue operations. The dashboard was built using <strong>Python</strong>,
             the <strong>Dash</strong> framework (built on Plotly and React), and <strong>MongoDB</strong>
-            as the backing database. Users can filter animals by rescue type — Water Rescue,
-            Mountain &amp; Wilderness Rescue, and Disaster &amp; Individual Tracking — and view
+            as the backing database. Users can filter animals by rescue type - Water Rescue,
+            Mountain &amp; Wilderness Rescue, and Disaster &amp; Individual Tracking - and view
             dynamic data tables, pie charts, and a geolocation map that updates in real time
             as filter criteria change.
           </p>
@@ -110,7 +110,7 @@
             dictionary-based filters. The CRUD module created a new database connection on
             every call, which is an anti-pattern that exhausts connection limits under load.
             There was no indexing strategy, no aggregation pipeline usage, no geospatial
-            indexing, and no database-level access control — the application connected as a
+            indexing, and no database-level access control - the application connected as a
             superuser for all operations.
           </p>
           <p>
@@ -130,7 +130,7 @@
                 <div class="timeline-item">
                   <h4>Connection Pooling</h4>
                   <p class="meta">animal_shelter.py · MongoClient</p>
-                  <p style="font-size:.88rem;">Singleton pattern — one shared client instance across all CRUD operations.</p>
+                  <p style="font-size:.88rem;">Singleton pattern - one shared client instance across all CRUD operations.</p>
                 </div>
                 <div class="timeline-item">
                   <h4>Compound Indexes</h4>
@@ -193,12 +193,12 @@
           realistic concurrent load, this design would exhaust the connection pool and produce
           <code>ServerSelectionTimeoutError</code> exceptions. The enhanced version implements a
           module-level singleton: <code>MongoClient</code> is instantiated once at import time,
-          and the shared client object — which internally manages a connection pool — is passed
+          and the shared client object - which internally manages a connection pool - is passed
           to the CRUD class. This is the pattern recommended by the official PyMongo documentation.
         </p>
         <p>
           <strong>Compound Indexes.</strong> Without indexes, every filter operation in the
-          dashboard requires a full collection scan — O(n) for a collection of any size.
+          dashboard requires a full collection scan - O(n) for a collection of any size.
           I analyzed the dashboard's actual filter patterns and created compound indexes matching
           the most common query shapes: <code>(animal_type, breed)</code> for the type-and-breed
           filter, <code>(age_upon_outcome_in_weeks)</code> for age-range filters, and a
@@ -214,7 +214,7 @@
           efficiently. I rewrote the analytics queries as aggregation pipelines using
           <code>$match</code>, <code>$group</code>, <code>$sort</code>, and
           <code>$project</code> stages. The pie chart data, for example, now executes a single
-          aggregation that groups by breed and counts within the filtered set — instead of
+          aggregation that groups by breed and counts within the filtered set - instead of
           fetching all matching documents and computing the breakdown in Python.
         </p>
         <p>
@@ -222,7 +222,7 @@
           latitude/longitude coordinates from the dataset without any spatial awareness.
           I extended the data model to store coordinates as GeoJSON <code>Point</code>
           objects and added a <code>2dsphere</code> index. The dashboard now supports
-          radius-based filtering — the user can select a rescue zone and the query uses
+          radius-based filtering - the user can select a rescue zone and the query uses
           MongoDB's <code>$geoWithin</code> operator to retrieve only animals within the
           defined operational radius.
         </p>
@@ -247,7 +247,7 @@
           layer can absorb, and how much unnecessary work a poorly-designed one pushes onto
           the application layer. Every time I moved a computation from Python into a MongoDB
           aggregation stage, I gained a clearer mental model of the boundary between application
-          logic and data logic — and how violating that boundary creates both performance
+          logic and data logic - and how violating that boundary creates both performance
           problems and maintainability problems.
         </p>
         <p>
@@ -282,7 +282,7 @@
       </p>
 
       <div class="code-block">
-<span class="cmt"># animal_shelter.py — enhanced CRUD module</span><br>
+<span class="cmt"># animal_shelter.py - enhanced CRUD module</span><br>
 <span class="kw">from</span> pymongo <span class="kw">import</span> MongoClient, GEOSPHERE, ASCENDING<br>
 <span class="kw">from</span> pymongo.errors <span class="kw">import</span> PyMongoError<br>
 <span class="kw">import</span> os<br><br>
