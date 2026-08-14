@@ -1,0 +1,17 @@
+<div class="admin-shell">
+	<header class="admin-shell__bar">
+		<a routerLink="/login" class="admin-shell__brand" *ngIf="!auth.isLoggedIn()">Travlr Admin</a>
+		<a routerLink="/trips" class="admin-shell__brand" *ngIf="auth.isLoggedIn()">Travlr Admin</a>
+
+		<nav class="admin-shell__nav">
+			<a routerLink="/trips" *ngIf="auth.isLoggedIn()">Trips</a>
+			<a routerLink="/trips/new" *ngIf="auth.isLoggedIn()">New Trip</a>
+			<a routerLink="/login" *ngIf="!auth.isLoggedIn()">Login</a>
+			<button type="button" *ngIf="auth.isLoggedIn()" (click)="logout()">Logout</button>
+		</nav>
+	</header>
+
+	<main class="admin-shell__content">
+		<router-outlet></router-outlet>
+	</main>
+</div>

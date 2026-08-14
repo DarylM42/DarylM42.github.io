@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+    <div id="background">
+        <div id="page">
+
+            {{> header}}
+            {{> nav}}
+
+            <div id="contents">
+                <h1>{{title}}</h1>
+
+                <ul id="sites">
+                    {{#each trips}}
+                        <li>
+                            <a href="/travel/{{code}}">
+                                <img src="/images/{{image}}" alt="{{name}} image" width="260" height="180">
+                            </a>
+                            <h2><a href="/travel/{{code}}">{{name}}</a></h2>
+
+                            <p><strong>Code:</strong> {{code}}</p>
+                            <p><strong>Length:</strong> {{length}} days</p>
+                            <p><strong>Start Date:</strong> {{start}}</p>
+                            <p><strong>Price:</strong> ${{price}}</p>
+                            <p>{{description}}</p>
+                            <p class="travel-actions">
+                                <a class="action-link" href="/travel/{{code}}">Trip Details</a>
+                                <a class="action-link" href="/api/trips/{{code}}">View API JSON</a>
+                            </p>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+
+            {{> footer}}
+
+        </div>
+    </div>
+</body>
+</html>

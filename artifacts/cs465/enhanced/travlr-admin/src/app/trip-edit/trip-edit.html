@@ -1,0 +1,121 @@
+<div class="container mt-4" *ngIf="trip">
+  <h2 class="mb-4">Edit Trip</h2>
+
+  <form #tripForm="ngForm" (ngSubmit)="saveTrip()">
+
+    <!-- Name -->
+    <div class="mb-3">
+      <label class="form-label">Name</label>
+      <input 
+        type="text"
+        class="form-control"
+        [(ngModel)]="trip.name"
+        name="name"
+        required
+        minlength="3"
+        #name="ngModel">
+      <div *ngIf="name.invalid && name.touched" class="text-danger small mt-1">
+        Name is required and must be at least 3 characters.
+      </div>
+    </div>
+
+    <!-- Code -->
+    <div class="mb-3">
+      <label class="form-label">Code</label>
+      <input 
+        type="text"
+        class="form-control"
+        [(ngModel)]="trip.code"
+        name="code"
+        required
+        #code="ngModel">
+      <div *ngIf="code.invalid && code.touched" class="text-danger small mt-1">
+        Code is required.
+      </div>
+    </div>
+
+    <!-- Start Date -->
+    <div class="mb-3">
+      <label class="form-label">Start Date</label>
+      <input 
+        type="date"
+        class="form-control"
+        [(ngModel)]="trip.start"
+        name="start"
+        required
+        #start="ngModel">
+      <div *ngIf="start.invalid && start.touched" class="text-danger small mt-1">
+        Start date is required.
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea
+        class="form-control"
+        rows="4"
+        [(ngModel)]="trip.description"
+        name="description"
+        required
+        minlength="10"
+        #description="ngModel"></textarea>
+      <div *ngIf="description.invalid && description.touched" class="text-danger small mt-1">
+        Description must be at least 10 characters.
+      </div>
+    </div>
+
+    <!-- Length -->
+    <div class="mb-3">
+      <label class="form-label">Length (days)</label>
+      <input
+        type="number"
+        class="form-control"
+        [(ngModel)]="trip.length"
+        name="length"
+        required
+        min="1"
+        #length="ngModel">
+      <div *ngIf="length.invalid && length.touched" class="text-danger small mt-1">
+        Length must be at least 1 day.
+      </div>
+    </div>
+
+    <!-- Price -->
+    <div class="mb-3">
+      <label class="form-label">Price</label>
+      <input
+        type="number"
+        class="form-control"
+        [(ngModel)]="trip.price"
+        name="price"
+        required
+        min="0"
+        step="0.01"
+        #price="ngModel">
+      <div *ngIf="price.invalid && price.touched" class="text-danger small mt-1">
+        Price must be zero or greater.
+      </div>
+    </div>
+
+    <div *ngIf="saveError" class="alert alert-danger">
+      {{ saveError }}
+    </div>
+
+    <!-- Buttons -->
+    <button 
+      type="submit" 
+      class="btn btn-success me-2"
+      [disabled]="tripForm.invalid">
+      Save Changes
+    </button>
+
+    <button 
+      type="button" 
+      class="btn btn-secondary"
+      (click)="cancel()">
+      Cancel
+    </button>
+
+  </form>
+</div>

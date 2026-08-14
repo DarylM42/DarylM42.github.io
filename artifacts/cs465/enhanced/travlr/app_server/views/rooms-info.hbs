@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+    <div id="background">
+        <div id="page">
+
+            {{> header}}
+            {{> nav}}
+
+            <div id="contents">
+                <h1>{{room.name}}</h1>
+
+                <ul id="sites">
+                    <li>
+                        <img src="/images/{{room.image}}" alt="{{room.name}} image" width="260" height="180">
+                        <h2>{{room.name}}</h2>
+                        <p><strong>Code:</strong> {{room.code}}</p>
+                        <p><strong>Type:</strong> {{room.type}}</p>
+                        <p><strong>Price:</strong> ${{room.price}}</p>
+                        <p>{{room.description}}</p>
+                        <p class="travel-actions">
+                            <a class="action-link" href="/rooms/json/{{room.code}}">View JSON</a>
+                            <a class="action-link" href="/rooms">Back to Rooms</a>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+
+            {{> footer}}
+
+        </div>
+    </div>
+</body>
+</html>
