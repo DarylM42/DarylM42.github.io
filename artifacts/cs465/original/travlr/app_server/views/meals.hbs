@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+    <div id="background">
+        <div id="page">
+
+            {{> header}}
+            {{> nav}}
+
+            <div id="contents">
+                <h1>{{title}}</h1>
+
+                <ul id="sites">
+                    {{#each meals}}
+                        <li>
+                            <a href="/meals/{{code}}">
+                                <img src="/images/{{image}}" alt="{{name}} image" width="260" height="180">
+                            </a>
+                            <h2><a href="/meals/{{code}}">{{name}}</a></h2>
+
+                            <p><strong>Code:</strong> {{code}}</p>
+                            <p><strong>Type:</strong> {{type}}</p>
+                            <p><strong>Price:</strong> ${{price}}</p>
+                            <p>{{description}}</p>
+                            <p class="travel-actions">
+                                <a class="action-link" href="/meals/{{code}}">Meal Details</a>
+                                <a class="action-link" href="/meals/json/{{code}}">View JSON</a>
+                            </p>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+
+            {{> footer}}
+
+        </div>
+    </div>
+</body>
+</html>
