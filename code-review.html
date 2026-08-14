@@ -266,6 +266,46 @@
     </div>
   </section>
 
+  <!-- ===== CODE REVIEW REFLECTION ===== -->
+  <section class="section section-alt">
+    <div class="container">
+      <span class="section-label">Code Review Reflection</span>
+      <h2>Lessons from the Review Process</h2>
+      <div class="divider"></div>
+
+      <div class="narrative">
+        <p>
+          The code review process provided a structured way to evaluate each artifact before beginning
+          any enhancement work. By examining the original implementations through the lenses of
+          functionality, readability, security, algorithmic efficiency, and testability, I was able
+          to identify weaknesses that would meaningfully guide the enhancement phase.
+        </p>
+        <p>
+          Across all three artifacts, several themes emerged: missing input validation, hardcoded
+          credentials, inconsistent naming conventions, lack of modular structure, and limited or
+          nonexistent error handling. These issues highlighted the importance of defensive programming
+          and designing systems that are both secure and maintainable. The review also reinforced the
+          value of automated testing, especially in the CS-300 AVL Tree Program, where unit tests
+          ultimately caught subtle rotation-order bugs that would have been difficult to detect manually.
+        </p>
+        <p>
+          The insights gained from the review directly shaped the enhancements made to each artifact.
+          In CS-465, the absence of authentication and validation led to implementing JWT, RBAC, bcrypt
+          hashing, and Joi validation. In CS-300, the lack of testing and the algorithmic weaknesses of
+          the BST informed the decision to implement AVL balancing and a dedicated test suite. In CS-340,
+          identifying insecure database access patterns and missing indexes led to adding schema validation,
+          removing hardcoded credentials, optimizing queries, and modularizing the notebook.
+        </p>
+        <p>
+          Overall, the code review served as the foundation for the enhancement work. It ensured that
+          improvements were not only functional but aligned with industry standards for secure, efficient,
+          and maintainable software. The process strengthened my ability to evaluate code critically and
+          reinforced the importance of thoughtful design decisions before writing any new code.
+        </p>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <!-- ===== FOOTER ===== -->
