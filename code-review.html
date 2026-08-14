@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code Review | Daryl Murtha ePortfolio</title>
+  <meta name="description" content="CS-499 Code Review video walkthrough – analysis of all three artifacts before enhancement.">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-brand">
+      <span>Daryl Murtha</span>&nbsp;<span class="accent">| CS-499</span>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.parentElement.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="code-review.html" class="active">Code Review</a></li>
+      <li><a href="cs465.html">CS-465</a></li>
+      <li><a href="cs300.html">CS-300</a></li>
+      <li><a href="cs340.html">CS-340</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== PAGE HEADER ===== -->
+<header class="page-header">
+  <div class="container">
+    <p class="eyebrow">CS-499 Capstone · Pre-Enhancement Analysis</p>
+    <h1>Code Review</h1>
+    <p>
+      A structured walkthrough of all three artifacts in their original state —
+      identifying existing functionality, documenting weaknesses, and outlining
+      the planned enhancements before any code was written.
+    </p>
+  </div>
+</header>
+
+<!-- ===== BREADCRUMB ===== -->
+<div class="breadcrumb">
+  <div class="container">
+    <a href="index.html">Home</a>
+    <span>›</span>
+    Code Review
+  </div>
+</div>
+
+<main>
+
+  <!-- ===== VIDEO SECTION ===== -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">Video Walkthrough</span>
+      <h2>Code Review Recording</h2>
+      <div class="divider"></div>
+
+      <div class="callout orange" style="margin-bottom:1.75rem;">
+        <strong>📌 Action Required — Add Your Video Link</strong>
+        Replace the placeholder below with your actual YouTube, Kaltura, or Panopto embed URL.
+        Instructions are provided in the comments of this file.
+      </div>
+
+      <!-- ============================================================
+           HOW TO EMBED YOUR CODE REVIEW VIDEO
+           ============================================================
+           Option A — YouTube:
+             1. Go to your YouTube video.
+             2. Click Share → Embed.
+             3. Copy the src URL from the iframe tag (looks like:
+                https://www.youtube.com/embed/VIDEO_ID)
+             4. Replace YOUR_VIDEO_EMBED_URL below with that URL.
+
+           Option B — Kaltura / Panopto / Other:
+             Follow the same embed steps for your platform and replace
+             the src attribute in the iframe below.
+
+           Option C — Local video file:
+             Replace the entire <div class="video-container"> block with:
+             <video controls style="width:100%;border-radius:10px;">
+               <source src="assets/code-review.mp4" type="video/mp4">
+             </video>
+           ============================================================ -->
+
+      <!-- PLACEHOLDER — replace src with your embed URL -->
+      <div class="video-placeholder">
+        <div class="play-icon">▶️</div>
+        <p style="font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:.5rem;">Code Review Video</p>
+        <p>
+          Replace this placeholder with your embedded video.<br>
+          See the HTML comment above for step-by-step instructions.<br><br>
+          <a href="YOUR_VIDEO_URL_HERE" target="_blank" rel="noopener">
+            → Click here to watch the video directly
+          </a>
+        </p>
+      </div>
+
+      <!-- UNCOMMENT AND FILL IN when you have your embed URL:
+      <div class="video-container">
+        <iframe
+          src="YOUR_VIDEO_EMBED_URL"
+          title="CS-499 Code Review – Daryl Murtha"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      -->
+
+      <p style="margin-top:1.25rem;color:var(--muted);font-size:.9rem;">
+        <strong>Duration:</strong> Approximately 20–30 minutes &nbsp;|&nbsp;
+        <strong>Covers:</strong> CS-465, CS-300, CS-340 &nbsp;|&nbsp;
+        <strong>Format:</strong> Screen share with narrated walkthrough
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== REVIEW OVERVIEW ===== -->
+  <section class="section section-alt">
+    <div class="container">
+      <span class="section-label">Review Structure</span>
+      <h2>What the Code Review Covers</h2>
+      <div class="divider"></div>
+      <p style="max-width:680px;margin-bottom:2rem;">
+        Each artifact is analyzed through a consistent framework that mirrors the review
+        process used in professional software engineering teams: examine existing
+        functionality, identify weaknesses, and document a concrete improvement plan.
+      </p>
+
+      <div class="grid-3">
+
+        <div class="card">
+          <div class="card-header-bar"></div>
+          <div class="card-body">
+            <p class="section-label" style="margin-bottom:.4rem;">CS-465</p>
+            <h3 style="margin-bottom:.75rem;">Full Stack App Review</h3>
+            <ul style="font-size:.9rem;list-style:none;">
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border);">✔ Existing routing &amp; CRUD reviewed</li>
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border);">⚠ No authentication identified</li>
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border);">⚠ Plaintext passwords flagged</li>
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border);">⚠ No input validation</li>
+              <li style="padding:.3rem 0;">📋 Enhancement plan: JWT, RBAC, Helmet</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-bar"></div>
+          <div class="card-body">
+            <p class="section-label" style="margin-bottom:.4rem;">CS-300</p>
+            <h3 style="margin-bottom:.75rem;">AVL Tree Program Review</h3>
+            <ul style="font-size:.9rem;list-style:none;">
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border);">✔ BST operations reviewed</li>
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border);">⚠ O(n) worst-case risk flagged</li>
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border);">⚠ No input validation on CSV</li>
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border);">⚠ Zero automated tests</li>
+              <li style="padding:.3rem 0;">📋 Enhancement plan: AVL, tests, validation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-bar"></div>
+          <div class="card-body">
+            <p class="section-label" style="margin-bottom:.4rem;">CS-340</p>
+            <h3 style="margin-bottom:.75rem;">Grazioso Dashboard Review</h3>
+            <ul style="font-size:.9rem;list-style:none;">
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border);">✔ Dashboard layout &amp; filters reviewed</li>
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border);">⚠ New connection per query</li>
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border);">⚠ No indexes on any fields</li>
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border);">⚠ Superuser DB credentials</li>
+              <li style="padding:.3rem 0;">📋 Enhancement plan: pooling, indexes, RBAC</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REVIEW CHECKLIST ===== -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">Review Methodology</span>
+      <h2>Code Review Evaluation Framework</h2>
+      <div class="divider"></div>
+      <p style="max-width:680px;margin-bottom:2rem;">
+        Each artifact was evaluated against the following five dimensions, drawn from
+        industry code-review best practices and the CS-499 course outcomes.
+      </p>
+
+      <div class="grid-2">
+
+        <div class="narrative">
+          <h3>1. Existing Functionality</h3>
+          <div class="divider"></div>
+          <p>
+            Documented what the artifact currently does — features, user flows, data models,
+            and API surface. This establishes a baseline and ensures enhancements do not
+            accidentally regress working functionality.
+          </p>
+        </div>
+
+        <div class="narrative">
+          <h3>2. Code Structure &amp; Readability</h3>
+          <div class="divider"></div>
+          <p>
+            Examined naming conventions, function length, separation of concerns, and
+            inline comments. Identified areas where refactoring would make the codebase
+            more maintainable for future developers.
+          </p>
+        </div>
+
+        <div class="narrative">
+          <h3>3. Security Vulnerabilities</h3>
+          <div class="divider"></div>
+          <p>
+            Applied an OWASP-aligned lens to identify injection risks, broken authentication,
+            excessive privileges, missing validation, and insecure direct object references
+            in each artifact.
+          </p>
+        </div>
+
+        <div class="narrative">
+          <h3>4. Algorithmic Efficiency</h3>
+          <div class="divider"></div>
+          <p>
+            Analyzed time and space complexity of key operations. Identified unnecessary
+            full-collection scans, redundant network round trips, and data structure
+            choices that produced avoidable worst-case behavior.
+          </p>
+        </div>
+
+        <div class="narrative">
+          <h3>5. Enhancement Plan</h3>
+          <div class="divider"></div>
+          <p>
+            Concluded each artifact review with a structured plan listing specific
+            improvements, the rationale for each, the expected outcome, and the
+            course outcome it addresses. This plan was then executed during the
+            enhancement phase.
+          </p>
+        </div>
+
+        <div class="narrative">
+          <h3>6. Testing &amp; Verifiability</h3>
+          <div class="divider"></div>
+          <p>
+            Assessed whether automated tests existed for each artifact and whether the
+            code could be verified correct without manual inspection. All three original
+            artifacts lacked automated tests — the enhancement plans addressed this gap.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ARTIFACT LINKS ===== -->
+  <section class="section section-alt">
+    <div class="container">
+      <span class="section-label">Jump to Artifacts</span>
+      <h2>Read the Enhancement Narratives</h2>
+      <div class="divider"></div>
+      <p style="margin-bottom:1.5rem;">
+        Each artifact page contains the full enhancement narrative, code samples,
+        and links to the GitHub repositories for both the original and enhanced versions.
+      </p>
+      <div style="max-width:640px;">
+        <a href="cs465.html" style="text-decoration:none;">
+          <div class="artifact-link-card">
+            <div class="icon">🌐</div>
+            <div class="info">
+              <h4>CS-465 — Full Stack Application</h4>
+              <p>Software Engineering &amp; Design · JWT Auth · RBAC · Helmet.js</p>
+            </div>
+          </div>
+        </a>
+        <a href="cs300.html" style="text-decoration:none;">
+          <div class="artifact-link-card">
+            <div class="icon">🌳</div>
+            <div class="info">
+              <h4>CS-300 — AVL Tree Program</h4>
+              <p>Algorithms &amp; Data Structures · C++ · O(log n) · Unit Tests</p>
+            </div>
+          </div>
+        </a>
+        <a href="cs340.html" style="text-decoration:none;">
+          <div class="artifact-link-card">
+            <div class="icon">🐾</div>
+            <div class="info">
+              <h4>CS-340 — Grazioso Salvare Dashboard</h4>
+              <p>Databases · MongoDB Aggregation · Geospatial · Role-Based Security</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <p class="footer-name">Daryl Murtha</p>
+    <p>Computer Science · Southern New Hampshire University · CS-499 Capstone</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="code-review.html">Code Review</a>
+      <a href="cs465.html">CS-465</a>
+      <a href="cs300.html">CS-300</a>
+      <a href="cs340.html">CS-340</a>
+      <a href="https://github.com/YOUR-GITHUB-USERNAME" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+    <small>&copy; 2026 Daryl Murtha. All rights reserved.</small>
+  </div>
+</footer>
+
+</body>
+</html>
