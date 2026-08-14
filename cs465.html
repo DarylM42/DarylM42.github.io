@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CS-465 Full Stack App | Daryl Murtha ePortfolio</title>
+  <meta name="description" content="CS-465 Full Stack artifact enhancement – MEAN stack travel application with JWT authentication and RBAC.">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-brand">
+      <span>Daryl Murtha</span>&nbsp;<span class="accent">| CS-499</span>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.parentElement.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="code-review.html">Code Review</a></li>
+      <li><a href="cs465.html" class="active">CS-465</a></li>
+      <li><a href="cs300.html">CS-300</a></li>
+      <li><a href="cs340.html">CS-340</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== PAGE HEADER ===== -->
+<header class="page-header">
+  <div class="container">
+    <p class="eyebrow">Artifact 1 · Software Engineering &amp; Design</p>
+    <h1>CS-465: Full Stack Application</h1>
+    <p>
+      MEAN-stack travel booking application enhanced with JWT authentication,
+      role-based access control, input validation, and security hardening.
+    </p>
+    <div style="margin-top:1.25rem;display:flex;gap:.75rem;flex-wrap:wrap;">
+      <span class="tag">MongoDB</span>
+      <span class="tag">Express.js</span>
+      <span class="tag">Angular</span>
+      <span class="tag">Node.js</span>
+      <span class="tag green">JWT Auth</span>
+      <span class="tag green">RBAC</span>
+      <span class="tag green">Helmet.js</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===== BREADCRUMB ===== -->
+<div class="breadcrumb">
+  <div class="container">
+    <a href="index.html">Home</a>
+    <span>›</span>
+    CS-465 Full Stack Application
+  </div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main>
+
+  <!-- Links -->
+  <section class="section" style="padding-bottom:0;">
+    <div class="container">
+      <div class="grid-2">
+        <a href="https://github.com/YOUR-GITHUB-USERNAME/cs465-fullstack" target="_blank" rel="noopener" style="text-decoration:none;">
+          <div class="artifact-link-card">
+            <div class="icon">📂</div>
+            <div class="info">
+              <h4>Enhanced Code on GitHub</h4>
+              <p>View the full enhanced CS-465 repository → github.com/YOUR-GITHUB-USERNAME/cs465-fullstack</p>
+            </div>
+          </div>
+        </a>
+        <a href="https://github.com/YOUR-GITHUB-USERNAME/cs465-fullstack/tree/original" target="_blank" rel="noopener" style="text-decoration:none;">
+          <div class="artifact-link-card">
+            <div class="icon">🗂️</div>
+            <div class="info">
+              <h4>Original Artifact (Branch)</h4>
+              <p>Compare against the unmodified original code on the <code>original</code> branch.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Artifact Overview -->
+  <section class="section">
+    <div class="container">
+      <div class="grid-2-1" style="align-items:start;">
+        <div>
+          <span class="section-label">Artifact Overview</span>
+          <h2>What Is This Artifact?</h2>
+          <div class="divider"></div>
+          <p>
+            The CS-465 artifact is a full-stack travel booking web application built with the MEAN
+            stack — <strong>MongoDB</strong> as the document database, <strong>Express.js</strong>
+            as the RESTful API layer, <strong>Angular</strong> as the single-page application
+            frontend, and <strong>Node.js</strong> as the server runtime. The application was
+            originally developed during the CS-465 Full Stack Development course, where it served
+            as a vehicle for learning MEAN-stack fundamentals: routing, CRUD operations, data
+            modeling, and API consumption.
+          </p>
+          <p>
+            In its original state the application provided core booking functionality but lacked
+            any meaningful authentication or authorization layer. Any user with network access
+            could invoke administrative API endpoints directly, bypassing the frontend entirely.
+            User credentials were stored in plaintext, and no input validation prevented
+            malformed or malicious data from reaching the database.
+          </p>
+          <p>
+            This artifact was selected for the ePortfolio because it provides a rich surface area
+            for demonstrating software engineering and design competencies — specifically,
+            architectural refactoring, secure authentication design, and the application of
+            industry-standard security middleware.
+          </p>
+        </div>
+
+        <!-- Sidebar -->
+        <div>
+          <div class="card">
+            <div class="card-header-bar"></div>
+            <div class="card-body">
+              <h4 style="margin-bottom:1rem;">Enhancement Summary</h4>
+              <div class="timeline">
+                <div class="timeline-item">
+                  <h4>JWT Authentication</h4>
+                  <p class="meta">Backend · middleware/auth.js</p>
+                  <p style="font-size:.88rem;">Stateless token issuance and verification on all protected routes.</p>
+                </div>
+                <div class="timeline-item">
+                  <h4>bcrypt Password Hashing</h4>
+                  <p class="meta">Backend · models/user.js</p>
+                  <p style="font-size:.88rem;">Passwords hashed with salt factor 12; plaintext never persisted.</p>
+                </div>
+                <div class="timeline-item">
+                  <h4>Role-Based Access Control</h4>
+                  <p class="meta">Backend · middleware/authorize.js</p>
+                  <p style="font-size:.88rem;">Admin, editor, and viewer roles enforced at the route layer.</p>
+                </div>
+                <div class="timeline-item">
+                  <h4>Input Validation (Joi)</h4>
+                  <p class="meta">Backend · validation/schemas.js</p>
+                  <p style="font-size:.88rem;">All API inputs validated and sanitized before processing.</p>
+                </div>
+                <div class="timeline-item">
+                  <h4>HTTP Security Headers</h4>
+                  <p class="meta">Backend · app.js</p>
+                  <p style="font-size:.88rem;">Helmet.js applies CSP, HSTS, X-Frame-Options, and more.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Narrative -->
+  <section class="section section-alt">
+    <div class="container">
+      <span class="section-label">Enhancement Narrative</span>
+      <h2>Why These Enhancements?</h2>
+      <div class="divider"></div>
+
+      <div class="narrative">
+        <h3>Justification for Inclusion</h3>
+        <div class="divider"></div>
+        <p>
+          I selected the CS-465 Full Stack Application for this artifact category because it
+          represents the most realistic simulation of a production-grade web application in
+          my academic work. The MEAN stack is widely used in industry, and the gap between
+          the original artifact and a deployable, secure application was significant enough
+          to produce meaningful, demonstrable enhancements. This project showcases my ability
+          to take a functional but insecure application and elevate it to a professionally
+          defensible state.
+        </p>
+      </div>
+
+      <div class="narrative" style="margin-top:1.5rem;">
+        <h3>What Was Enhanced and Why</h3>
+        <div class="divider"></div>
+        <p>
+          <strong>Authentication Architecture.</strong> The original application had no login
+          system — all routes were publicly accessible. I designed and implemented a complete
+          JWT-based authentication flow. When a user successfully authenticates, the server
+          issues a signed JSON Web Token containing the user's ID and role. Subsequent requests
+          include that token in the <code>Authorization: Bearer</code> header. A custom Express
+          middleware validates the token's signature and expiry on every protected route before
+          the request reaches the controller. This is stateless, horizontally scalable, and
+          aligned with the OAuth 2.0 ecosystem that dominates modern web APIs.
+        </p>
+        <p>
+          <strong>Password Security.</strong> The original code stored user passwords in plaintext
+          — a critical vulnerability that would expose every account if the database were breached.
+          I replaced this with bcrypt hashing (salt rounds = 12). Hashing happens in a Mongoose
+          pre-save hook so the plaintext password never touches the controller layer and is never
+          logged or transmitted after the initial registration request.
+        </p>
+        <p>
+          <strong>Role-Based Access Control.</strong> Beyond authentication (verifying who you are),
+          the application needed authorization (verifying what you are allowed to do). I defined
+          three roles — <em>admin</em>, <em>editor</em>, and <em>viewer</em> — and created a
+          composable <code>authorize()</code> middleware factory. Routes requiring elevated privileges
+          declare the permitted roles explicitly:
+          <code>router.delete('/trips/:id', authenticate, authorize('admin'), tripsController.delete)</code>.
+          This single-line declaration pattern makes access control auditable at a glance.
+        </p>
+        <p>
+          <strong>Input Validation.</strong> The original controllers accessed request body
+          properties directly with no validation. A malicious actor could submit unexpected
+          types, oversized strings, or operator injection payloads. I introduced Joi schemas
+          for every API input surface. The validation middleware rejects non-conforming requests
+          with structured 400 error responses before data reaches the database layer.
+        </p>
+        <p>
+          <strong>HTTP Security Headers.</strong> Helmet.js was added as the first middleware
+          in the Express pipeline. This automatically sets a suite of response headers — Content
+          Security Policy, HTTP Strict Transport Security, X-Content-Type-Options,
+          X-Frame-Options, and Referrer-Policy — that defend against a wide class of web
+          vulnerabilities including clickjacking, MIME-sniffing, and cross-site scripting.
+        </p>
+      </div>
+
+      <div class="narrative" style="margin-top:1.5rem;">
+        <h3>Reflection: What I Learned</h3>
+        <div class="divider"></div>
+        <p>
+          The most significant learning from this enhancement was experiencing first-hand how
+          security concerns permeate every layer of a full-stack application. I initially
+          planned to add authentication at the route level only, but quickly realized that
+          password handling required changes at the model level, role enforcement required
+          changes at the middleware level, and frontend Angular guards required changes at
+          the client level. Security is not a feature you bolt on — it is a cross-cutting
+          concern that must be considered throughout the architecture.
+        </p>
+        <p>
+          I also encountered practical challenges around token expiry and refresh flows. Deciding
+          on an appropriate token lifetime — balancing security (shorter = better) with usability
+          (longer = better for user experience) — required me to research industry standards and
+          ultimately implement a 15-minute access token paired with a 7-day refresh token stored
+          in an HttpOnly cookie. This decision reflects professional engineering judgment, not
+          just technical implementation.
+        </p>
+        <div class="callout teal">
+          <strong>Course Outcome Addressed</strong>
+          This enhancement directly addresses the CS-499 outcome: <em>"Demonstrate an ability to use
+          well-founded and innovative techniques, skills, and tools in computing practices for the
+          purpose of implementing computer solutions that deliver value and accomplish industry-specific
+          goals."</em>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Code Sample -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">Code Sample</span>
+      <h2>JWT Authentication Middleware</h2>
+      <div class="divider"></div>
+      <p>
+        The following middleware demonstrates the core of the authentication enhancement.
+        It extracts and verifies the JWT on every protected request, attaches the decoded
+        payload to <code>req.user</code>, and passes control to the next handler — or
+        returns a structured 401/403 response if verification fails.
+      </p>
+
+      <div class="code-block">
+<span class="cmt">// middleware/auth.js</span><br>
+<span class="kw">const</span> jwt  = <span class="fn">require</span>(<span class="str">'jsonwebtoken'</span>);<br>
+<span class="kw">const</span> User = <span class="fn">require</span>(<span class="str">'../models/user'</span>);<br><br>
+
+<span class="cmt">/**</span><br>
+<span class="cmt"> * authenticate — verifies the Bearer JWT on every protected route.</span><br>
+<span class="cmt"> * Attaches decoded payload to req.user for downstream middleware.</span><br>
+<span class="cmt"> */</span><br>
+<span class="kw">const</span> <span class="fn">authenticate</span> = <span class="kw">async</span> (req, res, next) =&gt; {<br>
+&nbsp;&nbsp;<span class="kw">try</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">const</span> header = req.headers.authorization;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> (!header || !header.<span class="fn">startsWith</span>(<span class="str">'Bearer '</span>)) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> res.<span class="fn">status</span>(<span class="num">401</span>).<span class="fn">json</span>({ error: <span class="str">'Authorization header missing or malformed'</span> });<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">const</span> token   = header.<span class="fn">split</span>(<span class="str">' '</span>)[<span class="num">1</span>];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">const</span> decoded = jwt.<span class="fn">verify</span>(token, process.env.JWT_SECRET);<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="cmt">// Confirm user still exists in the database</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">const</span> user = <span class="kw">await</span> User.<span class="fn">findById</span>(decoded.id).<span class="fn">select</span>(<span class="str">'-password'</span>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> (!user) <span class="kw">return</span> res.<span class="fn">status</span>(<span class="num">401</span>).<span class="fn">json</span>({ error: <span class="str">'User no longer exists'</span> });<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;req.user = user;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">next</span>();<br>
+&nbsp;&nbsp;} <span class="kw">catch</span> (err) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">const</span> msg = err.name === <span class="str">'TokenExpiredError'</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;? <span class="str">'Token has expired — please log in again'</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="str">'Invalid token'</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> res.<span class="fn">status</span>(<span class="num">401</span>).<span class="fn">json</span>({ error: msg });<br>
+&nbsp;&nbsp;}<br>
+};<br><br>
+
+<span class="cmt">/**</span><br>
+<span class="cmt"> * authorize — factory that returns a middleware enforcing allowed roles.</span><br>
+<span class="cmt"> * Usage: router.delete('/trips/:id', authenticate, authorize('admin'), handler)</span><br>
+<span class="cmt"> */</span><br>
+<span class="kw">const</span> <span class="fn">authorize</span> = (...roles) =&gt; (req, res, next) =&gt; {<br>
+&nbsp;&nbsp;<span class="kw">if</span> (!roles.<span class="fn">includes</span>(req.user.role)) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> res.<span class="fn">status</span>(<span class="num">403</span>).<span class="fn">json</span>({<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error: <span class="str">`Role '${req.user.role}' is not authorized for this action`</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;});<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<span class="fn">next</span>();<br>
+};<br><br>
+
+module.exports = { authenticate, authorize };
+      </div>
+
+      <div class="callout" style="margin-top:1.5rem;">
+        <strong>View the full source on GitHub</strong>
+        Replace <code>YOUR-GITHUB-USERNAME</code> in the links above with your actual GitHub handle
+        to link directly to the middleware, models, and route files.
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <p class="footer-name">Daryl Murtha</p>
+    <p>Computer Science · Southern New Hampshire University · CS-499 Capstone</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="code-review.html">Code Review</a>
+      <a href="cs465.html">CS-465</a>
+      <a href="cs300.html">CS-300</a>
+      <a href="cs340.html">CS-340</a>
+      <a href="https://github.com/YOUR-GITHUB-USERNAME" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+    <small>&copy; 2026 Daryl Murtha. All rights reserved.</small>
+  </div>
+</footer>
+
+</body>
+</html>
