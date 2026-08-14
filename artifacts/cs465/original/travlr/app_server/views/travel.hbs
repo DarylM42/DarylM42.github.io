@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+    <div id="background">
+        <div id="page">
+
+            {{> header}}
+            {{> nav}}
+
+            <div id="contents">
+                <h1>{{title}}</h1>
+
+                <section class="trips-list">
+                    {{#each trips}}
+                        <article class="trip">
+                            <h2>{{name}}</h2>
+
+                            <p><strong>Code:</strong> {{code}}</p>
+                            <p><strong>Length:</strong> {{length}}</p>
+                            <p><strong>Start Date:</strong> {{start}}</p>
+                            <p><strong>Price:</strong> ${{price}}</p>
+
+                            <p>{{description}}</p>
+                        </article>
+                    {{/each}}
+                </section>
+            </div>
+
+            {{> footer}}
+
+        </div>
+    </div>
+</body>
+</html>
