@@ -102,7 +102,7 @@
           <p>
             In its original implementation the program used a basic, unbalanced Binary Search Tree
             (BST). While a BST offers average-case O(log n) performance for search and insertion,
-            it degrades to O(n) — effectively a linked list — when data is inserted in sorted or
+            it degrades to O(n) - effectively a linked list - when data is inserted in sorted or
             nearly-sorted order. For a course catalog that is almost always sorted alphabetically
             by course code, this is precisely the worst-case scenario, not a rare edge case.
           </p>
@@ -152,7 +152,7 @@
                 </tbody>
               </table>
               <p style="font-size:.8rem;color:var(--muted);margin-top:.75rem;">
-                BST worst-case occurs with sorted input — the common case for alphabetically
+                BST worst-case occurs with sorted input - the common case for alphabetically
                 ordered course codes.
               </p>
             </div>
@@ -190,7 +190,7 @@
         <div class="divider"></div>
         <p>
           The CS-300 artifact was chosen because it directly demonstrates mastery of algorithmic
-          complexity analysis and data structure selection — two of the most foundational skills
+          complexity analysis and data structure selection - two of the most foundational skills
           in computer science. The original BST implementation was correct in the narrow sense
           of producing right answers, but it was not engineered for robustness. An employer or
           technical interviewer would rightly question why a developer chose an unbalanced tree
@@ -215,10 +215,10 @@
           AVL rebalancing:
         </p>
         <ul style="margin-left:1.5rem;margin-bottom:1rem;">
-          <li><strong>Left Rotation</strong> — applied when the right subtree is heavy.</li>
-          <li><strong>Right Rotation</strong> — applied when the left subtree is heavy.</li>
-          <li><strong>Left-Right Rotation</strong> — double rotation for left-heavy right subtree.</li>
-          <li><strong>Right-Left Rotation</strong> — double rotation for right-heavy left subtree.</li>
+          <li><strong>Left Rotation</strong> - applied when the right subtree is heavy.</li>
+          <li><strong>Right Rotation</strong> - applied when the left subtree is heavy.</li>
+          <li><strong>Left-Right Rotation</strong> - double rotation for left-heavy right subtree.</li>
+          <li><strong>Right-Left Rotation</strong> - double rotation for right-heavy left subtree.</li>
         </ul>
         <p>
           Each rotation is a pure function that takes a node pointer and returns the new subtree
@@ -246,8 +246,8 @@
         <div class="divider"></div>
         <p>
           Implementing AVL rotations from scratch rather than using a library was a deliberately
-          challenging choice. Working through the four rotation cases — drawing diagrams, tracing
-          pointer assignments, and debugging balance-factor drift — gave me a far deeper understanding
+          challenging choice. Working through the four rotation cases - drawing diagrams, tracing
+          pointer assignments, and debugging balance-factor drift - gave me a far deeper understanding
           of tree mechanics than reading a textbook description could provide. I made mistakes:
           my initial right-left double rotation was updating heights in the wrong order, leading
           to a tree that reported itself as balanced when it was not. Catching that bug through
@@ -256,8 +256,8 @@
         <p>
           I also learned to be skeptical of average-case complexity claims. The BST's O(log n)
           average case sounds impressive until you ask: <em>average over what distribution?</em>
-          Real-world data is almost never uniformly random. Designing for the realistic worst case —
-          sorted input for a course catalog — is what separates production-quality code from
+          Real-world data is almost never uniformly random. Designing for the realistic worst case -
+          sorted input for a course catalog - is what separates production-quality code from
           homework code.
         </p>
         <div class="callout teal">
@@ -285,7 +285,7 @@
       </p>
 
       <div class="code-block">
-<span class="cmt">// avl_tree.cpp — insert with automatic rebalancing</span><br><br>
+<span class="cmt">// avl_tree.cpp - insert with automatic rebalancing</span><br><br>
 
 <span class="kw">int</span> <span class="fn">getHeight</span>(Node* node) {<br>
 &nbsp;&nbsp;<span class="kw">return</span> node ? node-&gt;height : <span class="num">0</span>;<br>
@@ -320,7 +320,7 @@ Node* <span class="fn">insert</span>(Node* node, Course course) {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;node-&gt;left  = <span class="fn">insert</span>(node-&gt;left,  course);<br>
 &nbsp;&nbsp;<span class="kw">else if</span> (course.courseId &gt; node-&gt;course.courseId)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;node-&gt;right = <span class="fn">insert</span>(node-&gt;right, course);<br>
-&nbsp;&nbsp;<span class="kw">else</span> <span class="kw">return</span> node; <span class="cmt">// duplicate — ignore</span><br><br>
+&nbsp;&nbsp;<span class="kw">else</span> <span class="kw">return</span> node; <span class="cmt">// duplicate - ignore</span><br><br>
 
 &nbsp;&nbsp;<span class="cmt">// 2. Update height of this ancestor node</span><br>
 &nbsp;&nbsp;node-&gt;height = <span class="num">1</span> + <span class="fn">max</span>(<span class="fn">getHeight</span>(node-&gt;left), <span class="fn">getHeight</span>(node-&gt;right));<br><br>
