@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CS-340 Grazioso Dashboard | Daryl Murtha ePortfolio</title>
+  <meta name="description" content="CS-340 Databases artifact – Grazioso Salvare animal rescue dashboard with MongoDB aggregation pipelines and RBAC.">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-brand">
+      <span>Daryl Murtha</span>&nbsp;<span class="accent">| CS-499</span>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.parentElement.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="code-review.html">Code Review</a></li>
+      <li><a href="cs465.html">CS-465</a></li>
+      <li><a href="cs300.html">CS-300</a></li>
+      <li><a href="cs340.html" class="active">CS-340</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== PAGE HEADER ===== -->
+<header class="page-header">
+  <div class="container">
+    <p class="eyebrow">Artifact 3 · Databases</p>
+    <h1>CS-340: Grazioso Salvare Dashboard</h1>
+    <p>
+      Animal-rescue analytics dashboard overhauled with MongoDB aggregation pipelines,
+      geospatial queries, granular role-based database security, and a fully
+      refactored CRUD module with connection pooling.
+    </p>
+    <div style="margin-top:1.25rem;display:flex;gap:.75rem;flex-wrap:wrap;">
+      <span class="tag orange">Python</span>
+      <span class="tag orange">MongoDB</span>
+      <span class="tag orange">Dash / Plotly</span>
+      <span class="tag orange">PyMongo</span>
+      <span class="tag orange">Aggregation Pipelines</span>
+      <span class="tag orange">Geospatial</span>
+      <span class="tag orange">RBAC</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===== BREADCRUMB ===== -->
+<div class="breadcrumb">
+  <div class="container">
+    <a href="index.html">Home</a>
+    <span>›</span>
+    CS-340 Grazioso Salvare Dashboard
+  </div>
+</div>
+
+<main>
+
+  <!-- Links -->
+  <section class="section" style="padding-bottom:0;">
+    <div class="container">
+      <div class="grid-2">
+        <a href="https://github.com/YOUR-GITHUB-USERNAME/cs340-grazioso" target="_blank" rel="noopener" style="text-decoration:none;">
+          <div class="artifact-link-card">
+            <div class="icon">📂</div>
+            <div class="info">
+              <h4>Enhanced Code on GitHub</h4>
+              <p>View the full enhanced CS-340 repository → github.com/YOUR-GITHUB-USERNAME/cs340-grazioso</p>
+            </div>
+          </div>
+        </a>
+        <a href="https://github.com/YOUR-GITHUB-USERNAME/cs340-grazioso/tree/original" target="_blank" rel="noopener" style="text-decoration:none;">
+          <div class="artifact-link-card">
+            <div class="icon">🗂️</div>
+            <div class="info">
+              <h4>Original Artifact (Branch)</h4>
+              <p>Compare against the unmodified original code on the <code>original</code> branch.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section class="section">
+    <div class="container">
+      <div class="grid-2-1" style="align-items:start;">
+        <div>
+          <span class="section-label">Artifact Overview</span>
+          <h2>What Is This Artifact?</h2>
+          <div class="divider"></div>
+          <p>
+            The CS-340 artifact is a web-based dashboard developed for the fictional nonprofit
+            <em>Grazioso Salvare</em>, an international animal rescue organization that trains
+            dogs for search-and-rescue operations. The dashboard was built using <strong>Python</strong>,
+            the <strong>Dash</strong> framework (built on Plotly and React), and <strong>MongoDB</strong>
+            as the backing database. Users can filter animals by rescue type — Water Rescue,
+            Mountain &amp; Wilderness Rescue, and Disaster &amp; Individual Tracking — and view
+            dynamic data tables, pie charts, and a geolocation map that updates in real time
+            as filter criteria change.
+          </p>
+          <p>
+            The original implementation used basic PyMongo <code>find()</code> calls with
+            dictionary-based filters. The CRUD module created a new database connection on
+            every call, which is an anti-pattern that exhausts connection limits under load.
+            There was no indexing strategy, no aggregation pipeline usage, no geospatial
+            indexing, and no database-level access control — the application connected as a
+            superuser for all operations.
+          </p>
+          <p>
+            This artifact was selected to demonstrate database engineering competency: not
+            just the ability to perform CRUD operations, but the ability to design a database
+            layer that is performant, scalable, and secure.
+          </p>
+        </div>
+
+        <!-- Sidebar -->
+        <div>
+          <div class="card">
+            <div class="card-header-bar"></div>
+            <div class="card-body">
+              <h4 style="margin-bottom:1rem;">Enhancement Timeline</h4>
+              <div class="timeline">
+                <div class="timeline-item">
+                  <h4>Connection Pooling</h4>
+                  <p class="meta">animal_shelter.py · MongoClient</p>
+                  <p style="font-size:.88rem;">Singleton pattern — one shared client instance across all CRUD operations.</p>
+                </div>
+                <div class="timeline-item">
+                  <h4>Compound Indexes</h4>
+                  <p class="meta">Database · ensure_index()</p>
+                  <p style="font-size:.88rem;">Indexes on animal_type, breed, age, and location fields for query speed.</p>
+                </div>
+                <div class="timeline-item">
+                  <h4>Aggregation Pipelines</h4>
+                  <p class="meta">animal_shelter.py · aggregate()</p>
+                  <p style="font-size:.88rem;">$match → $group → $sort replaces multiple find() + Python sorting.</p>
+                </div>
+                <div class="timeline-item">
+                  <h4>Geospatial Index &amp; Query</h4>
+                  <p class="meta">Database · 2dsphere index</p>
+                  <p style="font-size:.88rem;">$geoWithin / $near queries for radius-based rescue-zone filtering.</p>
+                </div>
+                <div class="timeline-item">
+                  <h4>Role-Based DB Security</h4>
+                  <p class="meta">MongoDB · createRole()</p>
+                  <p style="font-size:.88rem;">Viewer, editor, and admin DB users with minimal privilege grants.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Narrative -->
+  <section class="section section-alt">
+    <div class="container">
+      <span class="section-label">Enhancement Narrative</span>
+      <h2>Database Design Decisions &amp; Reflection</h2>
+      <div class="divider"></div>
+
+      <div class="narrative">
+        <h3>Justification for Inclusion</h3>
+        <div class="divider"></div>
+        <p>
+          The CS-340 artifact was selected because it occupies the databases category of the
+          ePortfolio and because the gap between the original implementation and professional
+          database engineering practices was the largest of any artifact. The original dashboard
+          worked for a small dataset in a development environment. It would not work correctly
+          at scale, would not protect data appropriately, and would not take advantage of the
+          document-oriented strengths of MongoDB. Closing that gap produced demonstrable,
+          measurable improvements in every category that matters in production: performance,
+          security, and maintainability.
+        </p>
+      </div>
+
+      <div class="narrative" style="margin-top:1.5rem;">
+        <h3>What Was Enhanced and Why</h3>
+        <div class="divider"></div>
+        <p>
+          <strong>Connection Pooling.</strong> The original <code>AnimalShelter</code> CRUD class
+          instantiated a new <code>MongoClient</code> in its constructor, meaning every time a
+          callback in the Dash application triggered a database read, a new TCP connection was
+          negotiated. MongoDB defaults to a maximum of 100 connections per server. Under any
+          realistic concurrent load, this design would exhaust the connection pool and produce
+          <code>ServerSelectionTimeoutError</code> exceptions. The enhanced version implements a
+          module-level singleton: <code>MongoClient</code> is instantiated once at import time,
+          and the shared client object — which internally manages a connection pool — is passed
+          to the CRUD class. This is the pattern recommended by the official PyMongo documentation.
+        </p>
+        <p>
+          <strong>Compound Indexes.</strong> Without indexes, every filter operation in the
+          dashboard requires a full collection scan — O(n) for a collection of any size.
+          I analyzed the dashboard's actual filter patterns and created compound indexes matching
+          the most common query shapes: <code>(animal_type, breed)</code> for the type-and-breed
+          filter, <code>(age_upon_outcome_in_weeks)</code> for age-range filters, and a
+          <code>2dsphere</code> index on the <code>location</code> GeoJSON field for geospatial
+          queries. The <code>ensure_index()</code> calls are idempotent and run at startup, so
+          they add negligible overhead and require no manual DBA intervention.
+        </p>
+        <p>
+          <strong>Aggregation Pipelines.</strong> The original code used <code>find()</code>
+          to retrieve large result sets, then performed grouping, counting, and sorting in
+          Python. This is inefficient: it transfers more data across the network than necessary
+          and performs work on the application server that the database server can do more
+          efficiently. I rewrote the analytics queries as aggregation pipelines using
+          <code>$match</code>, <code>$group</code>, <code>$sort</code>, and
+          <code>$project</code> stages. The pie chart data, for example, now executes a single
+          aggregation that groups by breed and counts within the filtered set — instead of
+          fetching all matching documents and computing the breakdown in Python.
+        </p>
+        <p>
+          <strong>Geospatial Queries.</strong> The original location map simply rendered
+          latitude/longitude coordinates from the dataset without any spatial awareness.
+          I extended the data model to store coordinates as GeoJSON <code>Point</code>
+          objects and added a <code>2dsphere</code> index. The dashboard now supports
+          radius-based filtering — the user can select a rescue zone and the query uses
+          MongoDB's <code>$geoWithin</code> operator to retrieve only animals within the
+          defined operational radius.
+        </p>
+        <p>
+          <strong>Role-Based Database Security.</strong> The original application connected
+          to MongoDB using a single superuser account for all operations. A read-only
+          dashboard callback that displays data should not hold credentials capable of
+          dropping collections or modifying indexes. I created three MongoDB database users
+          with explicitly scoped privileges: a <em>viewer</em> role with <code>find</code>
+          only, an <em>editor</em> role with <code>find</code>, <code>insert</code>,
+          and <code>update</code>, and an <em>admin</em> role with full collection
+          management. The application instantiates the appropriate client based on the
+          operation being performed.
+        </p>
+      </div>
+
+      <div class="narrative" style="margin-top:1.5rem;">
+        <h3>Reflection: What I Learned</h3>
+        <div class="divider"></div>
+        <p>
+          This enhancement deepened my appreciation for how much work a well-designed database
+          layer can absorb, and how much unnecessary work a poorly-designed one pushes onto
+          the application layer. Every time I moved a computation from Python into a MongoDB
+          aggregation stage, I gained a clearer mental model of the boundary between application
+          logic and data logic — and how violating that boundary creates both performance
+          problems and maintainability problems.
+        </p>
+        <p>
+          The geospatial indexing work was entirely new territory for me. Learning GeoJSON
+          document structure, 2dsphere index semantics, and the <code>$near</code> query
+          operator required reading through the MongoDB documentation carefully and running
+          many test queries before the results matched my expectations. That process reinforced
+          a professional habit I am still building: trusting the documentation over intuition
+          when working with unfamiliar systems.
+        </p>
+        <div class="callout teal">
+          <strong>Course Outcome Addressed</strong>
+          This enhancement directly addresses: <em>"Demonstrate an ability to use well-founded
+          and innovative techniques, skills, and tools in computing practices for the purpose
+          of implementing computer solutions that deliver value and accomplish industry-specific
+          goals,"</em> specifically in the context of database design and data management.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Code Sample -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">Code Sample</span>
+      <h2>Aggregation Pipeline &amp; Geospatial Query</h2>
+      <div class="divider"></div>
+      <p>
+        The following Python snippet shows the refactored <code>AnimalShelter</code> CRUD
+        module with the connection-pool singleton, the breed-summary aggregation pipeline
+        used to power the pie chart, and the geospatial rescue-zone query.
+      </p>
+
+      <div class="code-block">
+<span class="cmt"># animal_shelter.py — enhanced CRUD module</span><br>
+<span class="kw">from</span> pymongo <span class="kw">import</span> MongoClient, GEOSPHERE, ASCENDING<br>
+<span class="kw">from</span> pymongo.errors <span class="kw">import</span> PyMongoError<br>
+<span class="kw">import</span> os<br><br>
+
+<span class="cmt"># --- Connection pool singleton (one client per process) ---</span><br>
+_client = MongoClient(<br>
+&nbsp;&nbsp;host=os.getenv(<span class="str">'MONGO_URI'</span>, <span class="str">'mongodb://localhost:27017'</span>),<br>
+&nbsp;&nbsp;username=os.getenv(<span class="str">'MONGO_USER'</span>),<br>
+&nbsp;&nbsp;password=os.getenv(<span class="str">'MONGO_PASS'</span>),<br>
+&nbsp;&nbsp;authSource=<span class="str">'AAC'</span>,<br>
+&nbsp;&nbsp;maxPoolSize=<span class="num">50</span><br>
+)<br><br>
+
+<span class="kw">class</span> <span class="fn">AnimalShelter</span>:<br>
+&nbsp;&nbsp;<span class="kw">def</span> <span class="fn">__init__</span>(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;self.db  = _client[<span class="str">'AAC'</span>]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;self.col = self.db[<span class="str">'animals'</span>]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;self.<span class="fn">_ensure_indexes</span>()<br><br>
+
+&nbsp;&nbsp;<span class="kw">def</span> <span class="fn">_ensure_indexes</span>(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="cmt"># Compound index for common filter pattern</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;self.col.<span class="fn">create_index</span>([(<span class="str">'animal_type'</span>, ASCENDING), (<span class="str">'breed'</span>, ASCENDING)])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="cmt"># 2dsphere index for geospatial queries</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;self.col.<span class="fn">create_index</span>([(<span class="str">'location'</span>, GEOSPHERE)])<br><br>
+
+&nbsp;&nbsp;<span class="kw">def</span> <span class="fn">breed_summary</span>(self, match_filter: dict) -&gt; list:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"""Aggregation pipeline: count animals by breed within a filter."""</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;pipeline = [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="str">'$match'</span>:   match_filter },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="str">'$group'</span>:   { <span class="str">'_id'</span>: <span class="str">'$breed'</span>, <span class="str">'count'</span>: { <span class="str">'$sum'</span>: <span class="num">1</span> } } },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="str">'$sort'</span>:    { <span class="str">'count'</span>: -<span class="num">1</span> } },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="str">'$project'</span>: { <span class="str">'breed'</span>: <span class="str">'$_id'</span>, <span class="str">'count'</span>: <span class="num">1</span>, <span class="str">'_id'</span>: <span class="num">0</span> } }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> list(self.col.<span class="fn">aggregate</span>(pipeline))<br><br>
+
+&nbsp;&nbsp;<span class="kw">def</span> <span class="fn">animals_near</span>(self, longitude: float, latitude: float, radius_m: int) -&gt; list:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"""Return animals within radius_m metres of a point using $geoWithin."""</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;geo_filter = {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'location'</span>: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'$geoWithin'</span>: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'$centerSphere'</span>: [[longitude, latitude], radius_m / <span class="num">6378100</span>]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> list(self.col.<span class="fn">find</span>(geo_filter, { <span class="str">'_id'</span>: <span class="num">0</span> }))<br><br>
+
+&nbsp;&nbsp;<span class="kw">def</span> <span class="fn">read</span>(self, query: dict) -&gt; list:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">try</span>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> list(self.col.<span class="fn">find</span>(query, { <span class="str">'_id'</span>: <span class="num">0</span> }))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">except</span> PyMongoError <span class="kw">as</span> e:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">print</span>(<span class="str">f'Read error: {e}'</span>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> []
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <p class="footer-name">Daryl Murtha</p>
+    <p>Computer Science · Southern New Hampshire University · CS-499 Capstone</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="code-review.html">Code Review</a>
+      <a href="cs465.html">CS-465</a>
+      <a href="cs300.html">CS-300</a>
+      <a href="cs340.html">CS-340</a>
+      <a href="https://github.com/YOUR-GITHUB-USERNAME" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+    <small>&copy; 2026 Daryl Murtha. All rights reserved.</small>
+  </div>
+</footer>
+
+</body>
+</html>
