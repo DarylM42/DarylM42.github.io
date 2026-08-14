@@ -97,7 +97,7 @@
           <div class="divider"></div>
           <p>
             The CS-465 artifact is a full-stack travel booking web application built with the MEAN
-            stack <strong>MongoDB</strong> as the document database, <strong>Express.js</strong>
+            stack - <strong>MongoDB</strong> as the document database, <strong>Express.js</strong>
             as the RESTful API layer, <strong>Angular</strong> as the single-page application
             frontend, and <strong>Node.js</strong> as the server runtime. The application was
             originally developed during the CS-465 Full Stack Development course, where it served
@@ -113,7 +113,7 @@
           </p>
           <p>
             This artifact was selected for the ePortfolio because it provides a rich surface area
-            for demonstrating software engineering and design competencies specifically,
+            for demonstrating software engineering and design competencies - specifically,
             architectural refactoring, secure authentication design, and the application of
             industry-standard security middleware.
           </p>
@@ -185,7 +185,7 @@
         <div class="divider"></div>
         <p>
           <strong>Authentication Architecture.</strong> The original application had no login
-          system all routes were publicly accessible. I designed and implemented a complete
+          system - all routes were publicly accessible. I designed and implemented a complete
           JWT-based authentication flow. When a user successfully authenticates, the server
           issues a signed JSON Web Token containing the user's ID and role. Subsequent requests
           include that token in the <code>Authorization: Bearer</code> header. A custom Express
@@ -195,7 +195,7 @@
         </p>
         <p>
           <strong>Password Security.</strong> The original code stored user passwords in plaintext
-         a critical vulnerability that would expose every account if the database were breached.
+          - a critical vulnerability that would expose every account if the database were breached.
           I replaced this with bcrypt hashing (salt rounds = 12). Hashing happens in a Mongoose
           pre-save hook so the plaintext password never touches the controller layer and is never
           logged or transmitted after the initial registration request.
@@ -203,7 +203,7 @@
         <p>
           <strong>Role-Based Access Control.</strong> Beyond authentication (verifying who you are),
           the application needed authorization (verifying what you are allowed to do). I defined
-          three roles <em>admin</em>, <em>editor</em>, and <em>viewer</em> and created a
+          three roles - <em>admin</em>, <em>editor</em>, and <em>viewer</em> - and created a
           composable <code>authorize()</code> middleware factory. Routes requiring elevated privileges
           declare the permitted roles explicitly:
           <code>router.delete('/trips/:id', authenticate, authorize('admin'), tripsController.delete)</code>.
@@ -218,9 +218,9 @@
         </p>
         <p>
           <strong>HTTP Security Headers.</strong> Helmet.js was added as the first middleware
-          in the Express pipeline. This automatically sets a suite of response headers Content
+          in the Express pipeline. This automatically sets a suite of response headers - Content
           Security Policy, HTTP Strict Transport Security, X-Content-Type-Options,
-          X-Frame-Options, and Referrer-Policy — that defend against a wide class of web
+          X-Frame-Options, and Referrer-Policy - that defend against a wide class of web
           vulnerabilities including clickjacking, MIME-sniffing, and cross-site scripting.
         </p>
       </div>
@@ -234,13 +234,13 @@
           planned to add authentication at the route level only, but quickly realized that
           password handling required changes at the model level, role enforcement required
           changes at the middleware level, and frontend Angular guards required changes at
-          the client level. Security is not a feature you bolt on it is a cross-cutting
+          the client level. Security is not a feature you bolt on - it is a cross-cutting
           concern that must be considered throughout the architecture.
         </p>
         <p>
           I also encountered practical challenges around token expiry and refresh flows. Deciding
-          on an appropriate token lifetime balancing security (shorter = better) with usability
-          (longer = better for user experience) required me to research industry standards and
+          on an appropriate token lifetime - balancing security (shorter = better) with usability
+          (longer = better for user experience) - required me to research industry standards and
           ultimately implement a 15-minute access token paired with a 7-day refresh token stored
           in an HttpOnly cookie. This decision reflects professional engineering judgment, not
           just technical implementation.
@@ -265,7 +265,7 @@
       <p>
         The following middleware demonstrates the core of the authentication enhancement.
         It extracts and verifies the JWT on every protected request, attaches the decoded
-        payload to <code>req.user</code>, and passes control to the next handler or
+        payload to <code>req.user</code>, and passes control to the next handler - or
         returns a structured 401/403 response if verification fails.
       </p>
 
@@ -275,7 +275,7 @@
 <span class="kw">const</span> User = <span class="fn">require</span>(<span class="str">'../models/user'</span>);<br><br>
 
 <span class="cmt">/**</span><br>
-<span class="cmt"> * authenticate verifies the Bearer JWT on every protected route.</span><br>
+<span class="cmt"> * authenticate - verifies the Bearer JWT on every protected route.</span><br>
 <span class="cmt"> * Attaches decoded payload to req.user for downstream middleware.</span><br>
 <span class="cmt"> */</span><br>
 <span class="kw">const</span> <span class="fn">authenticate</span> = <span class="kw">async</span> (req, res, next) =&gt; {<br>
@@ -296,14 +296,14 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">next</span>();<br>
 &nbsp;&nbsp;} <span class="kw">catch</span> (err) {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">const</span> msg = err.name === <span class="str">'TokenExpiredError'</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;? <span class="str">'Token has expired — please log in again'</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;? <span class="str">'Token has expired - please log in again'</span><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="str">'Invalid token'</span>;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> res.<span class="fn">status</span>(<span class="num">401</span>).<span class="fn">json</span>({ error: msg });<br>
 &nbsp;&nbsp;}<br>
 };<br><br>
 
 <span class="cmt">/**</span><br>
-<span class="cmt"> * authorize — factory that returns a middleware enforcing allowed roles.</span><br>
+<span class="cmt"> * authorize - factory that returns a middleware enforcing allowed roles.</span><br>
 <span class="cmt"> * Usage: router.delete('/trips/:id', authenticate, authorize('admin'), handler)</span><br>
 <span class="cmt"> */</span><br>
 <span class="kw">const</span> <span class="fn">authorize</span> = (...roles) =&gt; (req, res, next) =&gt; {<br>
